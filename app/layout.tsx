@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Nav from "@/app/components/Nav";
+import Footer from "@/app/components/Footer";
+import { ThemeContextProvider } from "@/app/context/ThemeContext";
+import ThemeProvider from "@/app/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeContextProvider>
+          <ThemeProvider>
+            <Nav />
+            {/*<main className="flex-1 bg-bkg text-content ">{children}</main>*/}
+            <main className="flex-1  bg-bkg text-content ">{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </ThemeContextProvider>
+      </body>
     </html>
   );
 }
